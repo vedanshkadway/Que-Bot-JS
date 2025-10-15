@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  valkey:
+    image: valkey/valkey   # pin specific version
+    container_name: valkey
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  qdrant:
+    image: ghcr.io/pinecone-io/pinecone-index:latest  # or pin a version like qdrant/qdrant:v1.12.5
+    container_name: vector-db
+    environment:
+      PORT: 5081
+      INDEX_TYPE: serverless
+      VECTOR_TYPE: dense
+      DIMENSION: 2 
+      METRIC: cosine
+    ports:
+      - "5081:5081"
