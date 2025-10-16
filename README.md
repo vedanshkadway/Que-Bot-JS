@@ -31,20 +31,7 @@ It can analyze uploaded files (like PDFs or text files) and answer questions con
 - Express.js
 - BullMQ (Redis Queue)
 - Chroma (Vector Database)
-- OpenAI / Gemini API (for text embeddings + response generation)
+- Gemini API (for text embeddings + response generation)
 
 ---
 
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TD
-    A[User Uploads PDF] -->|API Request| B[Express Backend]
-    B --> C[Job Queue (BullMQ + Redis)]
-    C --> D[Worker Processes File]
-    D --> E[Extract Text + Create Embeddings]
-    E --> F[Store in Chroma Vector DB]
-    F --> G[Chat Query → Retrieve Relevant Chunks]
-    G --> H[Send Context + Query to LLM API]
-    H --> I[Generate Answer]
-    I --> J[Display Response on Next.js UI]
